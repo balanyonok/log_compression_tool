@@ -21,7 +21,7 @@ def get_log_files(logs_dir):
     for filename in filenames:
         filepath = os.path.join(logs_dir,filename)
         if os.path.isfile(filepath):
-            # we don't need the .gz or.xz files
+            # we don't need already compressed files
             if not filename.endswith(".gz"):
                log_path = os.path.join(logs_dir, filename)
                log_paths.append(log_path)
@@ -36,7 +36,11 @@ def compress_files(log_paths):
     with ".gz" suffix.
     For example, the directory will contain both `file.log` and `file.log.gz`.
     """
-    pass
+    for log_path in log_paths:
+        with open(log_path, 'rb') as f_in:
+            gz_log_path = log_path + ".gz"
+            with gzip.open(gz_log_path, 'wb') as f_out:
+                shutil.copyfileobj(f_in, f_out)
 
 
 if __name__ == "__main__":
