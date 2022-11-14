@@ -7,13 +7,15 @@ Compress the files in log directory to free up some space.
 import gzip
 import shutil
 import os
-import sys
+
+import argh
 
 
-def main(logs_dir):
+def main(logs_dir, no_remove=False):
     log_paths = get_log_files(logs_dir)
     compress_files(log_paths)
-    remove_original_files(log_paths)
+    if not no_remove:
+        remove_original_files(log_paths)
 
 
 def get_log_files(logs_dir):
@@ -67,5 +69,4 @@ def remove_original_files(log_paths):
             os.remove(log_path)
 
 if __name__ == "__main__":
-    logs_dir = sys.argv[0]
-    main(logs_dir)
+    argh.dispatch_command(main)
