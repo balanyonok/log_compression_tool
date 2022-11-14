@@ -47,15 +47,16 @@ def compress_files(log_paths):
     """
     Compress files in given list using gzip module.
 
-    Original file is removed, compressed copy is saved in the same directory
+    Original file is not removed, compressed copy is saved in the same directory
     with ".gz" suffix.
-    For example, the directory will contain`file.log.gz` instead of `file.log`.
+    For example, the directory will contain both `file.log.gz` and `file.log`.
     """
     for log_path in log_paths:
         with open(log_path, 'rb') as f_in:
             gz_log_path = log_path + ".gz"
             with gzip.open(gz_log_path, 'wb') as f_out:
                 shutil.copyfileobj(f_in, f_out)
+
 
 def remove_original_files(log_paths):
     """
