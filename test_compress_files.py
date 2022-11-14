@@ -32,7 +32,8 @@ def test_files_to_compress():
         "testfile1.log",
         "testfile1.log.gz",
     ]
-    # create a temporary directory with copies of files for further work
+
+    # create a temporary directory with copies of files for further work.
     with tempfile.TemporaryDirectory() as tmp_directory:
         for log_path in log_paths:
             shutil.copy(log_path, tmp_directory)
@@ -42,9 +43,12 @@ def test_files_to_compress():
         assert list(sorted(os.listdir(tmp_directory))) == list(sorted(expected_files))
 
 
-@pytest.mark.skip(reason="TODO")
 def test_no_files_to_compress():
     """
     Testcase: there aren't any files to be compressed.
     """
-    pass
+    log_paths = []
+    try:
+        assert compress_files(log_paths) == log_paths
+    except AssertionError:
+        print("No non-compressed files found")

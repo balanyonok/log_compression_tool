@@ -37,7 +37,6 @@ def test_dir_with_zipped_files_too():
     assert get_log_files(logs_dir) == expected_log_paths
 
 
-@pytest.mark.skip(reason="not part of MVP")
 def test_dir_with_diff_zipped_files():
     """
     Testcase: there are also compressed files with different extensions
@@ -51,7 +50,6 @@ def test_dir_with_diff_zipped_files():
     assert get_log_files(logs_dir) == expected_log_paths
 
 
-@pytest.mark.skip(reason="not part of MVP")
 def test_dir_only_with_zipped_files():
     """
     Testcase: there are ONLY already compressed files in given directory.
@@ -62,7 +60,6 @@ def test_dir_only_with_zipped_files():
     assert get_log_files(logs_dir) == expected_log_paths
 
 
-@pytest.mark.skip(reason="not part of MVP")
 def test_dir_with_empty_subdirs():
     """
     Testcase: there are empty subdirectories in given directory.
@@ -77,16 +74,15 @@ def test_dir_with_empty_subdirs():
     assert get_log_files(logs_dir) == expected_log_paths
 
 
-@pytest.mark.skip(reason="not part of MVP")
 def test_dir_with_subdirs():
     """
     Testcase: there are subdirectories with log files in given directory.
     """
     logs_dir = "tests/data/tricky_dir"
     expected_log_paths = [
-        "tests/data/tricky_subdir/testlog3",
-        "tests/data/tricky_subdir/testfile2.log",
-        "tests/data/tricky_subdir/testfile1.log",
+        "tests/data/tricky_dir/folder_log/testfile2.log",
+        "tests/data/tricky_dir/testlog3",
+        "tests/data/tricky_dir/testfile1.log",
     ]
 
     assert get_log_files(logs_dir) == expected_log_paths
